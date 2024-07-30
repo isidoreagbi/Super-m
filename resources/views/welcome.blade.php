@@ -82,22 +82,41 @@
             </div>
         </div>
 
-        <div class="">
+        <div class="d-grid-2">
             <div>
-                <h2 style="text-align: center; color:blue">Statistiques de produits par catégorie</h2>
+                <h4 style="text-align: center; color:blue">Statistiques de produits par catégorie</h4>
                 {!! $product_chart_by_category->container() !!}
             </div>
-            <br /><br />
+            {{-- <br /><br /> --}}
             <div>
-                <h2 style="text-align: center; color:blue">Vente de chaque mois dans l’année</h2>
+                <h4 style="text-align: center; color:blue">Vente de chaque mois dans l’année</h4>
                 {!! $product_chart_by_sale_product->container() !!}
             </div>
-            <div>
+            {{-- <div>
                 <h2 style="text-align: center; color:blue">chiffres d’affaire global de chaque mois dans l’année</h2>
                 {!! $product_chart_by_sale_product->container() !!}
             </div>
             <div>
                 <h2 style="text-align: center; color:blue"> produits / catégories les plus / moins vendus</h2>
+                {!! $product_chart_by_sale_product->container() !!}
+            </div> --}}
+        </div>
+        <br /><br />
+        <div class="d-grid-2">
+            {{-- <div>
+                <h2 style="text-align: center; color:blue">Statistiques de produits par catégorie</h2>
+                {!! $product_chart_by_category->container() !!}
+            </div>
+            <div>
+                <h2 style="text-align: center; color:blue">Vente de chaque mois dans l’année</h2>
+                {!! $product_chart_by_sale_product->container() !!}
+            </div> --}}
+            <div>
+                <h4 style="text-align: center; color:blue">chiffres d’affaire global de chaque mois dans l’année</h4>
+                {!! $product_chart_by_sale_product->container() !!}
+            </div>
+            <div>
+                <h4 style="text-align: center; color:blue"> produits / catégories les plus / moins vendus</h4>
                 {!! $product_chart_by_sale_product->container() !!}
             </div>
         </div>

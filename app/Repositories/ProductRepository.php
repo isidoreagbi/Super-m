@@ -170,19 +170,19 @@ class ProductRepository implements ProductInterface
         // }
         // $i = 0;
 
-        for ($i=0; $i < 12; $i++) { 
+        for ($i=1; $i < 12; $i++) {
+            $month = date('F',mktime(0,0,0,$i,1));
+            $names[] = $month;
             foreach ($json_data as $item) {
-                $i++;
-                $month = date('F',mktime(0,0,0,$i,1));
+                // $i++;
                 $count[] = $item['count'];
-                $names[] = $month;
             }
         }
         
 
         $chart = new SaleChart;
         $chart->labels($names);
-        $chart->dataset("Ventes du mois", "bar", [65, 59, 80, 81])->options([
+        $chart->dataset("Ventes $month", "bar", [12, 4, 25, 1, 7, 7, 85, 21, 4, 52, 52, 22])->options([
             'backgroundColor' => ['#046e24', "#dd4c09", "#0b7ad4", "#b20bd4", "#d1163e", "#178897", "#587512"],
         ]);
 
