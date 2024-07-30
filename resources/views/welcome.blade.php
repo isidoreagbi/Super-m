@@ -4,7 +4,8 @@
     <style>
         canvas {
             width: 100% !important;
-            aspect-ratio: 1/1;
+            height: 400px !important;
+            /* aspect-ratio: 1/1; */
         }
     </style>
 @endsection
@@ -81,9 +82,13 @@
             </div>
         </div>
 
-        <div class="d-grid-6">
+        <div class="">
             <div>
                 {!! $product_chart_by_category->container() !!}
+            </div>
+            <br /><br />
+            <div>
+                {!! $product_chart_by_sale_product->container() !!}
             </div>
         </div>
 
@@ -93,4 +98,5 @@
 @section('js')
     <script src="{{ URL::asset('assets/chart/chart.min.js') }}" charset="utf-8"></script>
     {!! $product_chart_by_category->script() !!}
+    {!! $product_chart_by_sale_product->script() !!}
 @endsection

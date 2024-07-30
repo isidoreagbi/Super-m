@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Charts\ProductChart;
+use App\Charts\SaleChart;
 use App\Interfaces\ProductInterface;
 use App\Models\Category;
 use App\Models\Product;
@@ -88,6 +89,100 @@ class ProductRepository implements ProductInterface
         $chart = new ProductChart;
         $chart->labels($names);
         $chart->dataset("Ordinateurs", "pie", $count)->options([
+            'backgroundColor' => ['#046e24', "#dd4c09", "#0b7ad4", "#b20bd4", "#d1163e", "#178897", "#587512"],
+        ]);
+
+        return $chart;
+    }
+
+    public function chartBySaleProduct()
+    {
+
+        $data = Product::select('category_id')
+            ->selectRaw("strftime('%m', created_at) as month, COUNT(*) as count")
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        $json_data = json_decode($data, true);
+
+        $names = [];
+        $count = [];
+
+        // $data = Product::selectRaw("strftime('%m', created_at) as month, COUNT(*) as count")
+        //             ->whereYear('created_at',date('Y'))
+        //             ->groupBy('month')
+        //             ->orderBy('month')
+        //             ->get();
+
+        // $labels = [];
+        // $data2 = [];
+        // $colors = ['blue', 'red', 'green', 'black', 'yellow'];
+        // $int = [5, 10, 2, 5, 2];
+
+        // for ($i=1; $i < 12; $i++) { 
+        //     $month = date('F',mktime(0,0,0,$i,1));
+        //     $count = 0;
+
+        //     foreach ($data as $datas) {
+        //         if ($datas->month == $i) {
+        //             $count = $datas->count;
+        //             break;
+        //         }
+        //     }
+
+        //     array_push($labels,$month);
+        //     array_push($data2,$count);
+        // }
+
+        // $datasets = [
+        //     [
+        //         'label' => 'Users',
+        //         'data' => $data,
+        //         'backgroundColor' => $colors
+        //     ]
+        //     ];
+
+            // $chart = new SaleChart;
+            // $chart->labels($month);
+            // $chart->dataset("Ordinateurs", "bar", $int)->options([
+            //     'backgroundColor' => $colors,
+            // ]);
+
+            // return $chart;
+
+
+        //------------------------------------------------------------------
+
+        // for ($i=1; $i < 12; $i++) { 
+        //     $month = date('F',mktime(0,0,0,$i,1));
+        //     $count = 0;
+
+        //     foreach ($data as $datas) {
+        //         if ($datas->month == $i) {
+        //             $count = $datas->count;
+        //             break;
+        //         }
+        //     }
+
+        //     array_push($labels,$month);
+        //     array_push($data2,$count);
+        // }
+        // $i = 0;
+
+        for ($i=0; $i < 12; $i++) { 
+            foreach ($json_data as $item) {
+                $i++;
+                $month = date('F',mktime(0,0,0,$i,1));
+                $count[] = $item['count'];
+                $names[] = $month;
+            }
+        }
+        
+
+        $chart = new SaleChart;
+        $chart->labels($names);
+        $chart->dataset("Ventes du mois", "bar", [65, 59, 80, 81])->options([
             'backgroundColor' => ['#046e24', "#dd4c09", "#0b7ad4", "#b20bd4", "#d1163e", "#178897", "#587512"],
         ]);
 
