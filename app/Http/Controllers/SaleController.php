@@ -42,7 +42,7 @@ class SaleController extends Controller
         $sale = new Sale();
         $sale->fullName = $request->name;
         $sale->quantity = $request->quantity;
-        $sale->remark = $request->remark;
+        $sale->remark = ($request->quantity) * 2;
         $sale->product_id = $request->product_id;
         $sale->save();
 
