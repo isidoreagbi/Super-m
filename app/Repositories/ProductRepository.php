@@ -100,6 +100,7 @@ class ProductRepository implements ProductInterface
 
         $data = Product::select('category_id')
             ->selectRaw("strftime('%m', created_at) as month, COUNT(*) as count")
+            // ->selectRaw("strftime('%m', created_at) as month, COUNT(*) as count")
             ->groupBy('month')
             ->orderBy('month')
             ->get();
@@ -109,68 +110,8 @@ class ProductRepository implements ProductInterface
         $names = [];
         $count = [];
 
-        // $data = Product::selectRaw("strftime('%m', created_at) as month, COUNT(*) as count")
-        //             ->whereYear('created_at',date('Y'))
-        //             ->groupBy('month')
-        //             ->orderBy('month')
-        //             ->get();
 
-        // $labels = [];
-        // $data2 = [];
-        // $colors = ['blue', 'red', 'green', 'black', 'yellow'];
-        // $int = [5, 10, 2, 5, 2];
-
-        // for ($i=1; $i < 12; $i++) { 
-        //     $month = date('F',mktime(0,0,0,$i,1));
-        //     $count = 0;
-
-        //     foreach ($data as $datas) {
-        //         if ($datas->month == $i) {
-        //             $count = $datas->count;
-        //             break;
-        //         }
-        //     }
-
-        //     array_push($labels,$month);
-        //     array_push($data2,$count);
-        // }
-
-        // $datasets = [
-        //     [
-        //         'label' => 'Users',
-        //         'data' => $data,
-        //         'backgroundColor' => $colors
-        //     ]
-        //     ];
-
-            // $chart = new SaleChart;
-            // $chart->labels($month);
-            // $chart->dataset("Ordinateurs", "bar", $int)->options([
-            //     'backgroundColor' => $colors,
-            // ]);
-
-            // return $chart;
-
-
-        //------------------------------------------------------------------
-
-        // for ($i=1; $i < 12; $i++) { 
-        //     $month = date('F',mktime(0,0,0,$i,1));
-        //     $count = 0;
-
-        //     foreach ($data as $datas) {
-        //         if ($datas->month == $i) {
-        //             $count = $datas->count;
-        //             break;
-        //         }
-        //     }
-
-        //     array_push($labels,$month);
-        //     array_push($data2,$count);
-        // }
-        // $i = 0;
-
-        for ($i=1; $i < 12; $i++) {
+        for ($i=1; $i <= 12; $i++) {
             $month = date('F',mktime(0,0,0,$i,1));
             $names[] = $month;
             foreach ($json_data as $item) {
@@ -178,12 +119,11 @@ class ProductRepository implements ProductInterface
                 $count[] = $item['count'];
             }
         }
-        
 
         $chart = new SaleChart;
         $chart->labels($names);
         $chart->dataset("Ventes $month", "bar", [12, 4, 25, 1, 7, 7, 85, 21, 4, 52, 52, 22])->options([
-            'backgroundColor' => ['#046e24', "#dd4c09", "#0b7ad4", "#b20bd4", "#d1163e", "#178897", "#587512"],
+            'backgroundColor' => ['#046e24', "#dd4c09", "#0b7ad4", "#b20bd4", "#d1163e", "#178897", "#587512", 'red', 'blue', 'yellow', '#ccc', 'black'],
         ]);
 
         return $chart;
