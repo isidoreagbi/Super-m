@@ -19,3 +19,4 @@ Route::get('/sales/create', [SaleController::class, 'create'])->name('sales.crea
 Route::post('/sales/create/processing', [SaleController::class, 'store'])->name('sales.store');
 Route::delete('/sales/delete/{id}', [SaleController::class, 'destroy'])->name('sales.destroy');
 Route::get('/sales/print/{id}', [SaleController::class, 'show'])->name('sales.print');
+// Route::get('/print/{sale_id}/receipts', [SaleController::class, 'print'])->name('print.receipts');

@@ -123,4 +123,30 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+
+    /*
+        PDF Management codes and dependances
+        Added by Me To Print PDFs
+    */
+
+    // 'providers' => [
+    //     // Autres fournisseurs de services
+    //     Barryvdh\DomPDF\ServiceProvider::class,
+    // ],
+
+    // 'aliases' => [
+    //     // Autres alias
+    //     'PDF' => Barryvdh\DomPDF\Facade::class,
+    // ],
+
+    // 'providers' => [
+    //     // Autres fournisseurs de services
+    //     Barryvdh\Snappy\ServiceProvider::class,
+    // ],
+
+    // 'aliases' => [
+    //     // Autres alias
+    //     'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+    // ],
+
 ];
