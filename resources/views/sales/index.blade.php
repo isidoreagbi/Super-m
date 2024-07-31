@@ -51,7 +51,7 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    {{ number_format($product->price, 0, " ") }} F CFA
+                                    {{ number_format(App\Models\Product::find($sale->product_id)->price, 0, " ") }} F CFA
                                 </td>
                                 <td>
                                     {{ $sale->fullName }}

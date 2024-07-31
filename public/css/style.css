@@ -277,6 +277,47 @@ textarea {
     padding: 20px;
 }
 
+.print-body{
+    font-size: 1.5rem;
+    font-family: roboto-regular;
+}
+.table-spacer{
+    width: 20px;
+}
+
+.receipt-title{
+    font-family: roboto-black;
+    font-size: 3rem;
+
+}
+.print-row p, .print-row h2, .print-row td, .print-row h4{
+    color: black !important;
+}
+
+.print-row{
+    display: grid;
+    grid-template-columns: .8fr 1fr .8fr;
+}
+
+.reciev{
+    padding: 30px !important;
+}
+
+.download-btn{
+    background-color: #0c75bb;
+    border-radius: 50%;
+    padding: 20px;
+    margin-left: 50px;
+}
+
+.download-btn i{
+    color: white;
+}
+
+.table-grid{
+    color: black;
+}
+
 @font-face {
     font-family: roboto-regular;
     src: url(../assets/fonts/roboto/Roboto-Regular.ttf);
