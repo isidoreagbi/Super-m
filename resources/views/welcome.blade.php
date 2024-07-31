@@ -4,7 +4,8 @@
     <style>
         canvas {
             width: 100% !important;
-            aspect-ratio: 1/1;
+            height: 400px !important;
+            /* aspect-ratio: 1/1; */
         }
     </style>
 @endsection
@@ -81,9 +82,25 @@
             </div>
         </div>
 
-        <div class="d-grid-6">
+        <div class="d-grid-2">
             <div>
+                <h4 style="text-align: center; color:blue">Statistiques de produits par catégorie</h4>
                 {!! $product_chart_by_category->container() !!}
+            </div>
+            <div>
+                <h4 style="text-align: center; color:blue">Vente de chaque mois dans l’année</h4>
+                {!! $product_chart_by_sale_product->container() !!}
+            </div>
+        </div>
+        <br /><br />
+        <div class="d-grid-2">
+            <div>
+                <h4 style="text-align: center; color:blue">chiffres d’affaire global de chaque mois dans l’année</h4>
+                {!! $product_chart_by_sale_product->container() !!}
+            </div>
+            <div>
+                <h4 style="text-align: center; color:blue"> produits / catégories les plus / moins vendus</h4>
+                {!! $product_chart_by_sale_product->container() !!}
             </div>
         </div>
 
@@ -93,4 +110,5 @@
 @section('js')
     <script src="{{ URL::asset('assets/chart/chart.min.js') }}" charset="utf-8"></script>
     {!! $product_chart_by_category->script() !!}
+    {!! $product_chart_by_sale_product->script() !!}
 @endsection
