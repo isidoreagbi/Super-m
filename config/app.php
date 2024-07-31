@@ -139,14 +139,14 @@ return [
     //     'PDF' => Barryvdh\DomPDF\Facade::class,
     // ],
 
-    'providers' => [
-        // Autres fournisseurs de services
-        Barryvdh\Snappy\ServiceProvider::class,
-    ],
+    // 'providers' => [
+    //     // Autres fournisseurs de services
+    //     Barryvdh\Snappy\ServiceProvider::class,
+    // ],
 
-    'aliases' => [
-        // Autres alias
-        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
-    ],
+    // 'aliases' => [
+    //     // Autres alias
+    //     'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+    // ],
 
 ];
