@@ -1,96 +1,123 @@
 @extends('layout.base')
 
-@section('css')
-    <style>
-        canvas {
-            width: 100% !important;
-            aspect-ratio: 1/1;
-        }
-    </style>
-@endsection
 
 @section('content')
     @include('includes.sidebar')
 
-    {{-- <div class="wrap-content">
+    @include('includes.appbar')
+    <div class="wrap-content print-body">
 
-        @include('includes.appbar')
 
         <br /><br /><br />
 
         <div class="d-grid-4">
-            <div class="dashboard-card">
-                <table width="100%">
-                    <tr>
-                        <td>
-                            <span class="h1">{{ $categories }}</span>
-                            <small>Catégories</small>
-                        </td>
-                        <td class="text-right">
-                            <a href="{{ route('categories.index') }}" class="button primary">
-                                <i class="fas fa-arrow-right-long"></i>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="dashboard-card">
-                <table width="100%">
-                    <tr>
-                        <td>
-                            <span class="h1">{{ $products }}</span>
-                            <small>Produits</small>
-                        </td>
-                        <td class="text-right">
-                            <a href="{{ route('categories.index') }}" class="button success">
-                                <i class="fas fa-arrow-right-long"></i>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="dashboard-card">
-                <table width="100%">
-                    <tr>
-                        <td>
-                            <span class="h1">{{ 0 }}</span>
-                            <small>Ventes</small>
-                        </td>
-                        <td class="text-right">
-                            <a href="{{ route('sales.index') }}" class="button error">
-                                <i class="fas fa-arrow-right-long"></i>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="dashboard-card">
-                <table width="100%">
-                    <tr>
-                        <td>
-                            <span class="h1">{{ 0 }}</span>
-                            <small>F CFA</small>
-                        </td>
-                        <td class="text-right">
-                            <a href="#!" class="button warning">
-                                <i class="fas fa-arrow-right-long"></i>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
         </div>
 
         <div class="d-grid-6">
-            <div>
-                {!! $product_chart_by_category->container() !!}
+        </div>
+
+        <div class="container print-row ">
+            <div class="col"></div>
+            <div class="alert alert-success reciev" id="receipt">
+
+                {{-- @if ($message = Session::get('error'))
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @endif --}}
+
+                <div style="background-color: #D8F7D3; border-raduis: 30px; padding: 10px;">
+                    
+                <h2>Reçus No: {{ $sale->id }}</h2>
+                <h2 class="receipt-title">Super m Master</h2>
+                <p>Lomé, Togo</p>
+                <p>Créé le {{ $sale->created_at }}</p>
+                <p>Tel: (+228) 98 58 93 02</p>
+
+                <p>
+                    Client : {{ $sale->fullName }}
+                </p>
+
+                {{-- <table>
+                    <tr>
+                        <td>Mode Règlement</td>
+                        <td class="table-spacer"></td>
+                        <td>Espèce</td>
+                    </tr>
+
+                    <tr>
+                        <td>Prix du unitaire produit</td>
+                        <td class="table-spacer"></td>
+                        <td>{{ App\Models\Product::find($sale->product_id)->price }} FCFA</td>
+
+                    </tr>
+                    <tr>
+                        <td>Quantité du produit</td>
+                        <td class="table-spacer"></td>
+                        <td>{{ $sale->quantity }}</td>
+                    </tr>
+                    <tr>
+                        <td>Prix totale</td>
+                        <td class="table-spacer"></td>
+                        <?php
+                        // $total = App\Models\Product::find($sale->product_id)->price * $sale->quantity;
+                        ?>
+                        <td>{{ $total }} FCFA</td>
+                    </tr>
+                </table> --}}
+                
+                <div class="table-grid">
+                    <?php
+                    $total = App\Models\Product::find($sale->product_id)->price * $sale->quantity;
+                    ?>
+                    <div>Mode Règlement:  Espèce</div>
+                    <div>Prix unitaire du produit: {{ App\Models\Product::find($sale->product_id)->price }} FCFA</div>
+                    <div>Quantité du produit: {{ $sale->quantity }}</div>
+                    <div>Prix totale: {{ $total }} FCFA</div>
+                </div>
+                <h4>Merci pour votre achat !</h4>
+                </div>
+
+            </div>
+            <div class="col" style="margin-top: 20px">
+
+                <?php
+                $product_id = App\Models\Product::find($sale->product_id);
+                // 'product_id' => $product_id]     ['sale_id' => $sale->id]
+                ?>
+
+                <a href="#!" onclick="printReceipt()" class="download-btn">
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+
             </div>
         </div>
 
-    </div> --}}
+
+    </div>
 @endsection
 
-{{-- @section('js')
-    <script src="{{ URL::asset('assets/chart/chart.min.js') }}" charset="utf-8"></script>
-    {!! $product_chart_by_category->script() !!}
-@endsection --}}
+@section('js')
+    <script>
+        function printReceipt() {
+
+            var divToPrint = document.getElementById('receipt');
+
+            var newWin = window.open('', 'Print-Window');
+
+            newWin.document.open();
+
+            newWin.document.write(
+                '<html><body onload="window.print()" style="text-align: center;">' +
+                divToPrint.innerHTML +
+                '</body></html>');
+
+            newWin.document.close();
+
+            setTimeout(function() {
+                newWin.close();
+            }, 1000);
+
+        }
+    </script>
+@endsection
