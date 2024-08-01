@@ -47,8 +47,11 @@
                                     {{-- {{ $sale->name }} --}}
                                     @foreach($products as $product)
                                         {{-- value="{{ $product->id }}" {{ $product->category_id == $product->id ? 'selected' : '' }} --}}
-                                        {{ $product->name }}
+                                        {{-- {{ $product->name }} --}}
                                     @endforeach
+
+
+                                    {{ App\Models\Product::find($sale->product_id)->name }}
                                 </td>
                                 <td>
                                     {{ number_format(App\Models\Product::find($sale->product_id)->price, 0, " ") }} F CFA
