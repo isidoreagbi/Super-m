@@ -7,6 +7,7 @@ use App\Interfaces\ProductInterface;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 
+
 class MainController extends Controller
 {
     private CategoryInterface $categoryInterface;
@@ -29,12 +30,20 @@ class MainController extends Controller
         $products = count($this->productInterface->index());
         $sales = count(Sale::all());
 
-
+        
         return view('welcome', [
             "categories" => $categories,
             "products" => $products,
             "sales" => $sales,
-            "product_chart_by_category" => $this->productInterface->chartByCategory()
+            "product_chart_by_category" => $this->productInterface->chartByCategory(),
+            "product_chart_by_sale_product" => $this->productInterface->chartBySaleProduct()
         ]);
     }
+    // public function home() {
+
+    //     $categories = count($this->categoryInterface->index());
+    //     $products = count($this->productInterface->index());
+
+
+    // }
 }

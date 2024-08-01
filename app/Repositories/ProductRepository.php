@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Charts\ProductChart;
+use App\Charts\SaleChart;
 use App\Interfaces\ProductInterface;
 use App\Models\Category;
 use App\Models\Product;
@@ -93,4 +94,40 @@ class ProductRepository implements ProductInterface
 
         return $chart;
     }
+
+    public function chartBySaleProduct()
+    {
+
+
+        $data = Product::select('category_id')
+            ->selectRaw("strftime('%m', created_at) as month, COUNT(*) as count")
+            // ->selectRaw("strftime('%m', created_at) as month, COUNT(*) as count")
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        $json_data = json_decode($data, true);
+
+        $names = [];
+        $count = [];
+
+
+        for ($i=1; $i <= 12; $i++) {
+            $month = date('F',mktime(0,0,0,$i,1));
+            $names[] = $month;
+            foreach ($json_data as $item) {
+                // $i++;
+                $count[] = $item['count'];
+            }
+        }
+
+        $chart = new SaleChart;
+        $chart->labels($names);
+        $chart->dataset("Ventes $month", "bar", [12, 4, 25, 1, 7, 7, 85, 21, 4, 52, 52, 22])->options([
+            'backgroundColor' => ['#046e24', "#dd4c09", "#0b7ad4", "#b20bd4", "#d1163e", "#178897", "#587512", 'red', 'blue', 'yellow', '#ccc', 'black'],
+        ]);
+
+        return $chart;
+    }
+    
 }

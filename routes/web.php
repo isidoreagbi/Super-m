@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', [MainController::class, 'home'])->name('home');
 
+// Route::get('/', [MainController::class, 'home'])->name('home');
+
 Route::resource('/categories', CategoryController::class);
 Route::resource('/products', ProductController::class);
 Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
@@ -31,5 +33,4 @@ Route::post('/register/processing', [ClientController::class, 'create'])->name('
 Route::get('/logout', [ClientController::class, 'destroy'])->name('logout');
 Route::get('/profile/{id}/edit', [ClientController::class, 'edit'])->name('profile.edit');
 Route::patch('/profiles/update/{id}', [ClientController::class, 'update'])->name('profiles.update');
-
 

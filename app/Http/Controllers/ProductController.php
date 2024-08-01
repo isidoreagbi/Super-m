@@ -53,7 +53,7 @@ class ProductController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        $myRequest = new Request;
+        // $myRequest = new Request;
         
         if ($request->hasFile("image")) {
             move_uploaded_file($_FILES['image']['tmp_name'], 'db/products/' . $_FILES['image']['name']);
@@ -120,6 +120,7 @@ class ProductController extends Controller
         $product->short_description = $request->short_description;
         $product->long_description = $request->long_description;
         $product->short_description = $request->short_description;
+
         if ($request->hasFile("image")) {
             move_uploaded_file($_FILES['image']['tmp_name'], 'db/products/' . $_FILES['image']['name']);
             $product->image = $_FILES['image']['name'];
