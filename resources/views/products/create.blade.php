@@ -72,12 +72,7 @@
 
             <label for="file">Image de du produit</label>
             <div>
-                <<<<<<< HEAD <input type="file" name="image" id="file" placeholder="Insérer un fichier"
-                    class="form-control">
-                    =======
-                    <input type="file" name="file" id="file" placeholder="Insérer un fichier"
-                        class="form-control">
-                    >>>>>>> c3f7aed60bfd05d185eb85f3a70a509cc1950f3f
+                <input type="file" name="image" id="file" placeholder="Insérer un fichier" class="form-control">
             </div>
 
             <button type="submit" class="button w-100 primary">Soumettre</button>

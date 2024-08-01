@@ -75,9 +75,15 @@
             </div>
             <div class="dashboard-card">
                 <table width="100%">
+                    <?php
+                    $totalPrice = 0;
+                    foreach ($salesPrices as $sale) {
+                        $totalPrice = $totalPrice + $sale->total_price;
+                    }
+                    ?>
                     <tr>
                         <td>
-                            <span class="h1">{{ 0 }}</span>
+                            <span class="h1">{{ number_format($totalPrice, 0, ' ')}}</span>
                             <small>F CFA</small>
                         </td>
                         <td class="text-right">

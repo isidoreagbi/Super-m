@@ -6,11 +6,8 @@
     <div class="wrap-content">
         @include('includes.appbar')
 
-<<<<<<< HEAD
-        <form action="{{ route('products.update', $product->id) }}" class="category-form" method="POST" enctype="multipart/form-data">
-=======
-        <form action="{{ route('products.update', $product->id) }}" class="category-form" method="POST">
->>>>>>> c3f7aed60bfd05d185eb85f3a70a509cc1950f3f
+        <form action="{{ route('products.update', $product->id) }}" class="category-form" method="POST"
+            enctype="multipart/form-data">
             @csrf
 
             <br /><br /><br /><br />
@@ -38,9 +35,10 @@
 
             <label for="category"><b>Catégorie du produit</b></label>
             <select name="category_id" id="category" required>
-                <option value="" >Sélectionner une catégorie</option>
+                <option value="">Sélectionner une catégorie</option>
                 @forelse ($categories as $category)
-                    <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}</option>
                 @empty
                     <option value="">Pas de catégorie !</option>
                 @endforelse
@@ -48,21 +46,21 @@
             <br />
 
             <label for="name"><b>Nom du produit</b></label>
-            <input type="text" placeholder="Nom du produit ..." value="{{ $product->name }}" id="name" minlength="3" maxlength="128"
-                name="name" required />
+            <input type="text" placeholder="Nom du produit ..." value="{{ $product->name }}" id="name"
+                minlength="3" maxlength="128" name="name" required />
             <br />
 
             <table width="100%">
                 <tr>
                     <td>
                         <label for="price"><b>Prix en F CFA</b></label>
-                        <input type="text" min="0" value="{{ $product->price }}" max="1000000" placeholder="Prix ..."
-                            id="price" name="price" required />
+                        <input type="text" min="0" value="{{ $product->price }}" max="1000000"
+                            placeholder="Prix ..." id="price" name="price" required />
                     </td>
                     <td>
                         <label for="quantity"><b>Quantité</b></label>
-                        <input type="number" min="1" value="{{ $product->quantity }}" max="1000000" placeholder="quantité ..."
-                            id="quantity" name="quantity" required />
+                        <input type="number" min="1" value="{{ $product->quantity }}" max="1000000"
+                            placeholder="quantité ..." id="quantity" name="quantity" required />
                     </td>
                 </tr>
             </table><br />
@@ -74,18 +72,17 @@
             <label for="summernote"><b>Longue description</b> [Facultatif]</label><br /><br />
             <textarea name="long_description" id="summernote" rows="8" placeholder="Saisir une longue description ...">{{ $product->long_description }}</textarea><br />
 
-<<<<<<< HEAD
-            <img src="{{ URL::asset($product->image == '' ? 'db/images.png' : URL::asset('db/products/' . $product->image))  }}" alt="{{ $product->name }}" width="100%">
+            <img src="{{ URL::asset($product->image == '' ? 'db/images.png' : URL::asset('db/products/' . $product->image)) }}"
+                alt="{{ $product->name }}" width="100%">
 
             <br><br>
 
             <label for="file">Image de du produit</label>
             <div>
-                <input type="file" name="image" value="{{ $product->image }}" id="file" placeholder="Insérer un fichier" class="form-control">
+                <input type="file" name="image" value="{{ $product->image }}" id="file"
+                    placeholder="Insérer un fichier" class="form-control">
             </div>
 
-=======
->>>>>>> c3f7aed60bfd05d185eb85f3a70a509cc1950f3f
             <button type="submit" class="button w-100 primary">Soumettre</button>
         </form><br /><br /><br /><br />
 
