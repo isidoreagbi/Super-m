@@ -6,7 +6,7 @@
     <div class="wrap-content">
         @include('includes.appbar')
 
-        <form action="{{ route('products.store') }}" class="category-form" method="POST">
+        <form action="{{ route('products.store') }}" class="category-form" method="POST" enctype="multipart/form-data">
             @csrf
 
             <br /><br /><br /><br />
@@ -69,10 +69,15 @@
 
             <label for="summernote"><b>Longue description</b> [Facultatif]</label><br /><br />
             <textarea name="long_description" id="summernote" rows="8" placeholder="Saisir une longue description ..."></textarea><br />
-            
+
             <label for="file">Image de du produit</label>
             <div>
-                <input type="file" name="file" id="file" placeholder="Insérer un fichier" class="form-control">
+                <<<<<<< HEAD <input type="file" name="image" id="file" placeholder="Insérer un fichier"
+                    class="form-control">
+                    =======
+                    <input type="file" name="file" id="file" placeholder="Insérer un fichier"
+                        class="form-control">
+                    >>>>>>> c3f7aed60bfd05d185eb85f3a70a509cc1950f3f
             </div>
 
             <button type="submit" class="button w-100 primary">Soumettre</button>

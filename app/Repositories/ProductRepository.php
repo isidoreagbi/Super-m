@@ -128,4 +128,5 @@ class ProductRepository implements ProductInterface
 
         return $chart;
     }
+    
 }

@@ -34,6 +34,8 @@
                             <th>Nom du produit</th>
                             <th>Prix</th>
                             <th>Nom de l'acheteur</th>
+
+                            <th>Remarque</th>
                             <th>Quantité commandé</th>
                             <th width="100" class="text-center">
                                 Opérations
@@ -45,37 +47,44 @@
                             <tr>
                                 <td>
                                     {{-- {{ $sale->name }} --}}
-                                    @foreach($products as $product)
+                                    @foreach ($products as $product)
                                         {{-- value="{{ $product->id }}" {{ $product->category_id == $product->id ? 'selected' : '' }} --}}
                                         {{-- {{ $product->name }} --}}
                                     @endforeach
 
-
                                     {{ App\Models\Product::find($sale->product_id)->name }}
-                                </td>
-                                <td>
-                                    {{ number_format(App\Models\Product::find($sale->product_id)->price, 0, " ") }} F CFA
-                                </td>
-                                <td>
-                                    {{ $sale->fullName }}
-                                </td>
-                                <td>
-                                    {{ $sale->quantity }}
-                                </td>
-                                <td class="text-center">
-                                    <a href="{{ route('sales.print', $sale->id) }}" class="icon-button primary">
-                                        <i class="fas fas fa-print"></i>
-                                    </a>
-                                    &nbsp;
-                                    <form class="d-inline" action="{{ route('sales.destroy', $sale->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr(e) de vouloir supprimer cette vente {{ $product->name }} ? Cette action sera irréversible !')">
-                                        @csrf
-                                        @method("DELETE")
-                                        <button type="submit" class="icon-button error">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
+
+                                    {{-- {{ $product->name }} --}}
+
+                        </td>
+                        <td>
+                            {{ number_format(App\Models\Product::find($sale->product_id)->price, 0, ' ') }} F CFA
+                        </td>
+                        <td>
+                            {{ $sale->fullName }}
+                        </td>
+                        <td>
+                            {{ $sale->remark }}
+                        </td>
+                        <td>
+
+                            {{ $sale->quantity }}
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ route('sales.print', $sale->id) }}" class="icon-button primary">
+                                <i class="fas fas fa-print"></i>
+                            </a>
+                            &nbsp;
+                            <form class="d-inline" action="{{ route('sales.destroy', $sale->id) }}" method="POST"
+                                onsubmit="return confirm('Êtes-vous sûr(e) de vouloir supprimer cette vente {{ $product->name }} ? Cette action sera irréversible !')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="icon-button error">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

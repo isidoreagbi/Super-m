@@ -4,6 +4,7 @@
     <style>
         canvas {
             width: 100% !important;
+            aspect-ratio: 1/1;
             height: 400px !important;
             /* aspect-ratio: 1/1; */
         }
@@ -11,6 +12,13 @@
 @endsection
 
 @section('content')
+    {{-- <?php
+    // function redirect(){
+    //     if (!isset($_COOKIE['clientId'])) {
+    //         return route('login');
+    //     }
+    // }
+    ?> --}}
     @include('includes.sidebar')
 
     <div class="wrap-content">
@@ -54,7 +62,7 @@
                 <table width="100%">
                     <tr>
                         <td>
-                            <span class="h1">{{ 0 }}</span>
+                            <span class="h1">{{ $sales }}</span>
                             <small>Ventes</small>
                         </td>
                         <td class="text-right">
@@ -81,6 +89,12 @@
                 </table>
             </div>
         </div>
+
+
+        {{-- <div class="d-grid-6">
+            <div>
+                {!! $product_chart_by_category->container() !!}
+            </div> --}}
 
         <div class="d-grid-2">
             <div>

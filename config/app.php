@@ -149,4 +149,15 @@ return [
     //     'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
     // ],
 
+
+    // 'providers' => [
+    //     // Autres fournisseurs de services
+    //     Barryvdh\Snappy\ServiceProvider::class,
+    // ],
+
+    // 'aliases' => [
+    //     // Autres alias
+    //     'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+    // ],
+
 ];
