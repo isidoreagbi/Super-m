@@ -98,7 +98,6 @@ class ProductRepository implements ProductInterface
     public function chartBySaleProduct()
     {
 
-
         $data = Product::select('category_id')
             ->selectRaw("strftime('%m', created_at) as month, COUNT(*) as count")
             // ->selectRaw("strftime('%m', created_at) as month, COUNT(*) as count")

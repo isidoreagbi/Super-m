@@ -35,6 +35,7 @@
                             <th>Nom</th>
                             <th>Prix</th>
                             <th>Quantité</th>
+                            <th>Categorie</th>
                             <th width="100" class="text-center">
                                 Opérations
                             </th>
@@ -54,6 +55,13 @@
                                 </td>
                                 <td>
                                     {{ $product->quantity }}
+                                </td>
+                                <td>
+                                    @foreach($categories as $category)
+                                        {{-- value="{{ $product->id }}" {{ $product->category_id == $product->id ? 'selected' : '' }} --}}
+                                        {{-- {{ $product->name }} --}}
+                                    @endforeach
+                                    {{ App\Models\Category::find($product->category_id)->name }}
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('products.edit', $product->id) }}" class="icon-button primary">

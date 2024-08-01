@@ -27,11 +27,13 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $categories = Category::all();
         $data = $this->productInterface->index();
 
         return view('products.index', [
             'page' => 'products',
-            'products' => $data
+            'products' => $data,
+            "categories" => $categories
         ]);
     }
 
