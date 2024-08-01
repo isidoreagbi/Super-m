@@ -6,7 +6,7 @@
     <div class="wrap-content">
         @include('includes.appbar')
 
-        <form action="{{ route('products.update', $product->id) }}" class="category-form" method="POST">
+        <form action="{{ route('products.update', $product->id) }}" class="category-form" method="POST" enctype="multipart/form-data">
             @csrf
 
             <br /><br /><br /><br />
@@ -69,6 +69,15 @@
 
             <label for="summernote"><b>Longue description</b> [Facultatif]</label><br /><br />
             <textarea name="long_description" id="summernote" rows="8" placeholder="Saisir une longue description ...">{{ $product->long_description }}</textarea><br />
+
+            <img src="{{ URL::asset($product->image == '' ? 'db/images.png' : URL::asset('db/products/' . $product->image))  }}" alt="{{ $product->name }}" width="100%">
+
+            <br><br>
+
+            <label for="file">Image de du produit</label>
+            <div>
+                <input type="file" name="image" value="{{ $product->image }}" id="file" placeholder="Insérer un fichier" class="form-control">
+            </div>
 
             <button type="submit" class="button w-100 primary">Soumettre</button>
         </form><br /><br /><br /><br />

@@ -55,9 +55,9 @@ class ProductController extends Controller
     {
         $myRequest = new Request;
         
-        if ($myRequest->hasFile("file")) {
-            move_uploaded_file($_FILES['file']['tmp_name'], 'db/products/' . $_FILES['file']['name']);
-            $image = $_FILES['file']['name'];
+        if ($request->hasFile("image")) {
+            move_uploaded_file($_FILES['image']['tmp_name'], 'db/products/' . $_FILES['image']['name']);
+            $image = $_FILES['image']['name'];
         } else {
             $image = '';
         }
@@ -120,9 +120,9 @@ class ProductController extends Controller
         $product->short_description = $request->short_description;
         $product->long_description = $request->long_description;
         $product->short_description = $request->short_description;
-        if ($request->hasFile("file")) {
-            move_uploaded_file($_FILES['file']['tmp_name'], 'db/products/' . $_FILES['file']['name']);
-            $product->image = $_FILES['file']['name'];
+        if ($request->hasFile("image")) {
+            move_uploaded_file($_FILES['image']['tmp_name'], 'db/products/' . $_FILES['image']['name']);
+            $product->image = $_FILES['image']['name'];
         } else {
             $product->image = '';
         }

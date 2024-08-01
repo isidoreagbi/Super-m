@@ -31,6 +31,7 @@
                 <table id="datatable" class="stripe">
                     <thead>
                         <tr>
+                            <th>Image</th>
                             <th>Nom</th>
                             <th>Prix</th>
                             <th>Quantité</th>
@@ -42,6 +43,9 @@
                     <tbody>
                         @foreach ($products as $product)
                             <tr>
+                                <td>
+                                    <img src="{{ URL::asset($product->image == '' ? 'db/images.png' : URL::asset('db/products/' . $product->image))  }}" alt="{{ $product->name }}" height="30px">
+                                </td>
                                 <td>
                                     {{ $product->name }}
                                 </td>

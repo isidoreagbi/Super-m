@@ -6,7 +6,7 @@
     <div class="wrap-content">
         @include('includes.appbar')
 
-        <form action="{{ route('products.store') }}" class="category-form" method="POST">
+        <form action="{{ route('products.store') }}" class="category-form" method="POST" enctype="multipart/form-data">
             @csrf
 
             <br /><br /><br /><br />
@@ -72,7 +72,7 @@
             
             <label for="file">Image de du produit</label>
             <div>
-                <input type="file" name="file" id="file" placeholder="Insérer un fichier" class="form-control">
+                <input type="file" name="image" id="file" placeholder="Insérer un fichier" class="form-control">
             </div>
 
             <button type="submit" class="button w-100 primary">Soumettre</button>

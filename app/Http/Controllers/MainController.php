@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\CategoryInterface;
 use App\Interfaces\ProductInterface;
+use App\Models\Sale;
+use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
@@ -16,15 +18,22 @@ class MainController extends Controller
         $this->productInterface = $productInterface;
     }
 
-    public function home() {
+    public function home(Request $request) {
+
+        if (!$request->cookie('cookie')) {
+            // Rediriger vers une autre page si le cookie n'existe pas
+            return redirect()->route('login');
+        }
 
         $categories = count($this->categoryInterface->index());
         $products = count($this->productInterface->index());
+        $sales = count(Sale::all());
 
 
         return view('welcome', [
             "categories" => $categories,
             "products" => $products,
+            "sales" => $sales,
             "product_chart_by_category" => $this->productInterface->chartByCategory()
         ]);
     }
