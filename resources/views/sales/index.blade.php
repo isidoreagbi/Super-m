@@ -34,6 +34,7 @@
                             <th>Nom du produit</th>
                             <th>Prix</th>
                             <th>Nom de l'acheteur</th>
+                            <th>Remarque</th>
                             <th>Quantité commandé</th>
                             <th width="100" class="text-center">
                                 Opérations
@@ -57,6 +58,9 @@
                                 </td>
                                 <td>
                                     {{ $sale->fullName }}
+                                </td>
+                                <td>
+                                    {{ $sale->remark }}
                                 </td>
                                 <td>
                                     {{ $sale->quantity }}
