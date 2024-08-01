@@ -51,10 +51,12 @@
                                         {{-- value="{{ $product->id }}" {{ $product->category_id == $product->id ? 'selected' : '' }} --}}
                                         {{-- {{ $product->name }} --}}
                                     @endforeach
+
                                     {{ App\Models\Product::find($sale->product_id)->name }}
 
                                     {{-- {{ $product->name }} --}}
                                 </td>
+
 
 
                                 <td>
