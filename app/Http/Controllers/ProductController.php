@@ -71,8 +71,6 @@ class ProductController extends Controller
             "quantity" => $request->quantity,
             "short_description" => $request->short_description,
             "long_description" => $request->long_description,
-            "short_description" => $request->short_description,
-            "short_description" => $request->short_description,
             "image" => $image,
         ];
 
@@ -126,8 +124,6 @@ class ProductController extends Controller
         if ($request->hasFile("image")) {
             move_uploaded_file($_FILES['image']['tmp_name'], 'db/products/' . $_FILES['image']['name']);
             $product->image = $_FILES['image']['name'];
-        } else {
-            $product->image = '';
         }
         // $product->image = $request->file;
         $product->save();
