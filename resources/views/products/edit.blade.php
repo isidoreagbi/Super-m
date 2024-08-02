@@ -80,7 +80,7 @@
             <label for="file">Image de du produit</label>
             <div>
                 <input type="file" name="image" value="{{ $product->image }}" id="file"
-                    placeholder="Insérer un fichier" class="form-control">
+                    placeholder="Insérer un fichier">
             </div>
 
             <button type="submit" class="button w-100 primary">Soumettre</button>

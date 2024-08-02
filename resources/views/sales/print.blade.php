@@ -70,9 +70,14 @@
                     <?php
                     $total = App\Models\Product::find($sale->product_id)->price * $sale->quantity;
                     ?>
+                    <div>Nom du produit:  {{ App\Models\Product::find($sale->product_id)->name }}</div>
+                    <br>
                     <div>Mode Règlement:  Espèce</div>
+                    <br>
                     <div>Prix unitaire du produit: {{ App\Models\Product::find($sale->product_id)->price }} FCFA</div>
+                    <br>
                     <div>Quantité du produit: {{ $sale->quantity }}</div>
+                    <br>
                     <div>Prix totale: {{ $total }} FCFA</div>
                 </div>
                 <h4>Merci pour votre achat !</h4>

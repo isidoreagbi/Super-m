@@ -56,13 +56,24 @@ class SaleController extends Controller
         $sale->fullName = $request->name;
         $sale->quantity = $request->quantity;
         $sale->remark = $request->remark;
-        $totalPrice = $request->quantity * Product::find($request->product_id)->price;
-        $sale->total_price = $totalPrice;
+        $product = Product::find($request->product_id);
 
-        if (!$totalPrice) {
+        if (!$product) {
             return redirect()->back()->withErrors('Produit non trouvé.');
         }
-        $sale->CategoryId = Category::find(Product::find($request->product_id)->id)->id;
+
+        $totalPrice = $request->quantity * $product->price;
+        $sale->total_price = $totalPrice;
+
+        // Trouver la catégorie du produit
+        $category = Category::find($product->category_id);
+
+        if (!$category) {
+            return redirect()->back()->withErrors('Catégorie non trouvée.');
+        }
+
+        // Assigner les valeurs à l'objet sale
+        $sale->CategoryId = $category->id;
         $sale->product_id = $request->product_id;
         $sale->save();
 

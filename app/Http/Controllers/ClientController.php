@@ -29,9 +29,31 @@ class ClientController extends Controller
     {
         //
         $client = new Clients();
-        $client->username = $request->input('username');
-        $client->email = $request->input('email');
-        $client->password = Hash::make($request->input('password'));
+
+        $username = $request->username;
+        $email = $request->email;
+
+        $findUsername = Clients::where('username', $username)->exists();
+
+        if($findUsername){
+            return back()->with('error', 'Cet nom d\'utilisateur existe déjà !');
+        }
+
+        $client->username = $username;
+
+        $findEmail = Clients::where('email', $email)->exists();
+
+        if($findEmail){
+            return back()->with('error', 'Cet email existe déjà !');
+        }
+
+        $client->email = $email;
+
+        if($request->ConfirmPassword != $request->input('password')){
+            return back()->with('error', 'Les mot de passes sont différents !');
+        }
+
+        $client->password = Hash::make($request->password);
         $client->save();
 
         return redirect()->route('login')->with('succes');
@@ -67,7 +89,7 @@ class ClientController extends Controller
 
             $name = 'cookie';
             $value = $client->id;
-            $minutes = 150; // Durée de vie en minutes
+            $minutes = (86400 * 30); // Durée de vie en minutes
 
             // // Créer le cookie
             $cookie = cookie($name, $value, $minutes);
