@@ -120,17 +120,20 @@
             </div>
         </div>
         <br /><br />
-        <div class="d-grid-2 dashboard-card">
+        <div class="d-grid-1 dashboard-card">
             <div>
                 <h4 style="text-align: center; color:blue">Produits les plus / moins vendus</h4>
                 {!! $chartBySumProduct->container() !!}
             </div>
+        </div>
+        <br><br>
+        <div class="d-grid-1 dashboard-card">
             <div>
                 <h4 style="text-align: center; color:blue">Catégories les plus / moins vendus</h4>
                 {!! $chartBySumCategory->container() !!}
             </div>
         </div>
-
+        <br><br>
     </div>
 @endsection
 

@@ -210,7 +210,7 @@ class ProductRepository implements ProductInterface
         // Récupérer les données agrégées par mois
         $data = Sale::selectRaw('product_id as product, COUNT(*) as count')
             ->groupBy('product')
-            ->orderBy('product')
+            ->orderBy('count')
             ->get();
 
         $json_data = json_decode($data, true);
@@ -231,18 +231,52 @@ class ProductRepository implements ProductInterface
         $chart->dataset("Produits", "line", $count)->options([
             'backgroundColor' => 'transparent',
             'borderWidth' => 3,
-            'borderColor' => 'red'
+            'borderColor' => 'yellow'
         ]);
 
         return $chart;
     }
+
+    /* /// Diagramme pour radar
+        public function chartBySumProduct()
+    {
+        // Récupérer les données agrégées par mois
+        $data = Sale::selectRaw('product_id as product, COUNT(*) as count')
+            ->groupBy('product')
+            ->orderBy('product')
+            ->get();
+
+        $json_data = json_decode($data, true);
+
+        $names = [];
+        $count = [];
+
+        $i = 0;
+
+        foreach ($json_data as $item) {
+            $i++;
+            $count[] = $item['count'];
+            $names[] = Product::find($item['product'])->name;
+        }
+
+        $chart = new ProductChart;
+        $chart->labels($names);
+        $chart->dataset("Produits", "radar", $count)->options([
+            'backgroundColor' => 'transparent',
+            'borderWidth' => 3,
+            'borderColor' => 'yellow'
+        ]);
+
+        return $chart;
+    }
+    */
 
     public function chartBySumCategory()
     {
         // Récupérer les données agrégées par mois
         $data = Sale::selectRaw('CategoryId as Category, COUNT(*) as count')
             ->groupBy('Category')
-            ->orderBy('Category')
+            ->orderBy('count')
             ->get();
 
         $json_data = json_decode($data, true);

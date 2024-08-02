@@ -130,7 +130,7 @@ class ProductController extends Controller
 
         // return view('products.index')->with('success', 'Le produit a été modifié avec succès !');
         // return redirect()->route('index');
-        return back()->with("success", "Votre produit a été supprimé avec succès !");
+        return back()->with("success", "Votre produit a été modifié avec succès !");
     }
 
     /**
