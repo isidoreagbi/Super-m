@@ -102,25 +102,32 @@
                 {!! $product_chart_by_category->container() !!}
             </div> --}}
 
-        <div class="d-grid-2">
+        <div class="d-grid-2 dashboard-card">
             <div>
                 <h4 style="text-align: center; color:blue">Statistiques de produits par catégorie</h4>
                 {!! $product_chart_by_category->container() !!}
             </div>
             <div>
                 <h4 style="text-align: center; color:blue">Vente de chaque mois dans l’année</h4>
-                {!! $product_chart_by_sale_product->container() !!}
+                {!! $Chart_by_count_sale_product->container() !!}
             </div>
         </div>
         <br /><br />
-        <div class="d-grid-2">
+        <div class="d-grid-1 dashboard-card">
             <div>
                 <h4 style="text-align: center; color:blue">chiffres d’affaire global de chaque mois dans l’année</h4>
                 {!! $product_chart_by_sale_product->container() !!}
             </div>
+        </div>
+        <br /><br />
+        <div class="d-grid-2 dashboard-card">
             <div>
-                <h4 style="text-align: center; color:blue"> produits / catégories les plus / moins vendus</h4>
-                {!! $product_chart_by_sale_product->container() !!}
+                <h4 style="text-align: center; color:blue">Produits les plus / moins vendus</h4>
+                {!! $chartBySumProduct->container() !!}
+            </div>
+            <div>
+                <h4 style="text-align: center; color:blue">Catégories les plus / moins vendus</h4>
+                {!! $chartBySumCategory->container() !!}
             </div>
         </div>
 
@@ -131,4 +138,7 @@
     <script src="{{ URL::asset('assets/chart/chart.min.js') }}" charset="utf-8"></script>
     {!! $product_chart_by_category->script() !!}
     {!! $product_chart_by_sale_product->script() !!}
+    {!! $Chart_by_count_sale_product->script() !!}
+    {!! $chartBySumProduct->script() !!}
+    {!! $chartBySumCategory->script() !!}
 @endsection

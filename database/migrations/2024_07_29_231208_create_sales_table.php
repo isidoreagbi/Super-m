@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->text('remark')->nullable();
             $table->text('total_price');
+            $table->integer('CategoryId');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });

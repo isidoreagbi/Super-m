@@ -7,11 +7,17 @@
         @include('includes.appbar')
 
         <br /><br /><br />
+
         <div>
             <table width="100%">
                 <tr>
                     <td>
                         <h2>Liste des Ventes</h2>
+                    </td>
+                    <td class="text-right">
+                        <a href="{{ route('sales.show.report') }}" class="button primary">
+                            Voir le bilan
+                        </a>
                     </td>
                     <td class="text-right">
                         <a href="{{ route('sales.create') }}" class="button primary">

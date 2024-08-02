@@ -34,3 +34,7 @@ Route::get('/logout', [ClientController::class, 'destroy'])->name('logout');
 Route::get('/profile/{id}/edit', [ClientController::class, 'edit'])->name('profile.edit');
 Route::patch('/profiles/update/{id}', [ClientController::class, 'update'])->name('profiles.update');
 
+
+
+Route::get('/monthly-sales', [SaleController::class, 'getMonthlySales']);
+Route::get('/bilan/bilan', [SaleController::class, 'report'])->name('sales.show.report');

@@ -11,4 +11,7 @@ interface ProductInterface
     public function delete($id);
     public function chartByCategory();
     public function chartBySaleProduct();
+    public function chartByCountSaleProduct();
+    public function chartBySumProduct();
+    public function chartBySumCategory();
 }

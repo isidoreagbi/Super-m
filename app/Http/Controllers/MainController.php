@@ -38,7 +38,10 @@ class MainController extends Controller
             "sales" => $sales,
             "salesPrices" => $salesPrices,
             "product_chart_by_category" => $this->productInterface->chartByCategory(),
-            "product_chart_by_sale_product" => $this->productInterface->chartBySaleProduct()
+            "product_chart_by_sale_product" => $this->productInterface->chartBySaleProduct(),
+            "Chart_by_count_sale_product" => $this->productInterface->chartByCountSaleProduct(),
+            "chartBySumProduct" => $this->productInterface->chartBySumProduct(),
+            "chartBySumCategory" => $this->productInterface->chartBySumCategory()
         ]);
     }
     // public function home() {

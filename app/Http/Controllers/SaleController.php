@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Sale;
@@ -31,7 +32,7 @@ class SaleController extends Controller
         //
         $products = Product::all();
         $sales = Sale::all();
-        
+
         return view('sales.create', ["products" => $products]);
     }
 
@@ -40,14 +41,28 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
+
+        // Validation des données
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'quantity' => 'required|integer|min:1',
+        //     'remark' => 'nullable|string',
+        //     'product_id' => 'required|exists:products,id' // Assurez-vous que l'ID du produit est valide
+        // ]);
         //
-        
+
+
         $sale = new Sale();
         $sale->fullName = $request->name;
         $sale->quantity = $request->quantity;
         $sale->remark = $request->remark;
         $totalPrice = $request->quantity * Product::find($request->product_id)->price;
         $sale->total_price = $totalPrice;
+
+        if (!$totalPrice) {
+            return redirect()->back()->withErrors('Produit non trouvé.');
+        }
+        $sale->CategoryId = Category::find(Product::find($request->product_id)->id)->id;
         $sale->product_id = $request->product_id;
         $sale->save();
 
@@ -96,9 +111,10 @@ class SaleController extends Controller
         return back()->with('success', 'Vente supprimé avec succès !');
     }
 
-    public function print($sale_id){
-        
-        
+    public function print($sale_id)
+    {
+
+
         // $sale = Sale::with('products')->findOrFail($sale_id);
         /*$products = Product::all();
 
@@ -119,7 +135,7 @@ class SaleController extends Controller
 
         // Récupérez la vente à partir de votre modèle Sale ou tout autre moyen approprié
         $sale = Sale::findOrFail($sale_id); // Exemple si vous utilisez Eloquent
-  
+
         // New Add
         $data = [
             'title' => "Reçus",
@@ -135,7 +151,7 @@ class SaleController extends Controller
             return back()->with('error', 'Erreur lors de la génération du PDF');
         }
         // return redirect()->route('sales.index')->with('success', 'PDF généré avec succès!');
-    
+
 
         /*$options = new Options();
         $options->set('defaultFont', 'Arial');
@@ -155,8 +171,82 @@ class SaleController extends Controller
 
         // Output generated PDF to Browser (inline view or download)
         return $dompdf->stream('document.pdf');*/
+    }
 
+    public function getMonthlySales()
+    {
+        // Récupérer les ventes agrégées par mois
+        // Utiliser strftime pour extraire l'année et le mois
+        // $sales = Sale::selectRaw('strftime("%Y-%m", created_at) as month, SUM(total_price) as total')
+        $sales = Sale::selectRaw('strftime(quantity) as month, SUM(total_price) as total')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get()
+            ->mapWithKeys(function ($item) {
+                return [$item->month => $item->total];
+            });
+        // $sales = Sale::selectRaw('strftime("%m", created_at) as month, SUM(total_price) as total')
+        //     ->groupBy('month')
+        //     ->orderBy('month')
+        //     ->get()
+        //     ->mapWithKeys(function ($item) {
+        //         return [$item->month => $item->total];
+        // });
+
+        return view('stat', $sales);
+    }
+
+    public function getMonthlyCount()
+    {
+        // Récupérer les ventes agrégées par mois
+        // Utiliser strftime pour extraire l'année et le mois
+        // $sales = Sale::selectRaw('strftime("%Y-%m", created_at) as month, SUM(total_price) as total')
+        $sales = Sale::selectRaw('strftime(quantity) as month, COUNT(*) as total')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get()
+            ->mapWithKeys(function ($item) {
+                return [$item->month => $item->total];
+            });
+        // $sales = Sale::selectRaw('strftime("%m", created_at) as month, SUM(total_price) as total')
+        //     ->groupBy('month')
+        //     ->orderBy('month')
+        //     ->get()
+        //     ->mapWithKeys(function ($item) {
+        //         return [$item->month => $item->total];
+        // });
+
+        return view('stat', $sales);
+    }
+
+    public function report(Request $request)
+    {
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $query = Sale::query();
+
+        if ($startDate && $endDate) {
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+        } else {
+            // return view('sales.see')->with('error', 'Veillez renter une date de début et une date de fin !');
+        }
+        $sales = Sale::whereBetween('created_at', [$startDate, $endDate])->get();
+
+        $totalSales = $query->count();
+        $totalProducts = Product::count();
+        $totalRevenue = $query->sum('total_price');
+        // $sales = Sale::all();
+
+
+        return view('sales.bilan', [
+            'totalSales' => $totalSales,
+            'totalProducts' => $totalProducts,
+            'totalRevenue' => $totalRevenue,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            "sales" => $sales
+        ]);
     }
 }
-
-

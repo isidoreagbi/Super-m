@@ -67,7 +67,7 @@ class ClientController extends Controller
 
             $name = 'cookie';
             $value = $client->id;
-            $minutes = 60; // Durée de vie en minutes
+            $minutes = 150; // Durée de vie en minutes
 
             // // Créer le cookie
             $cookie = cookie($name, $value, $minutes);
