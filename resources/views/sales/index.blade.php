@@ -72,7 +72,7 @@
                                     {{ $sale->fullName }}
                                 </td>
                                 <td>
-                                    {{ $sale->remark }}
+                                    {!! $sale->remark !!}
                                 </td>
                                 <td>
 
