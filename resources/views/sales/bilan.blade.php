@@ -17,7 +17,7 @@
     <div class="container-fluid row">
 
         <div class="col" style="text-align: right">
-            <a href="{{ route('sales.index') }}" class="btn btn-primary">Retours</a>
+            <a href="{{ route('sales.index') }}" class="btn btn-primary">Retour</a>
         </div>
         <div class="col">
             <div class="container card" id="receipt">
